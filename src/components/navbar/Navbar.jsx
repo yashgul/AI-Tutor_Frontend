@@ -17,13 +17,9 @@ import Button from "@mui/material/Button";
 import { NavLink } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState, useEffect } from "react";
-
+import logo from "../../assets/logo.svg";
 const drawerWidth = 240;
-const navItems = [
-  { name: "About", url: "../about" },
-  { name: "Products", url: "../products" },
-  { name: "Cart", url: "../cart" },
-];
+const navItems = [{ name: "Courses", url: "../courses" }];
 
 function Navbar(props) {
   const { window } = props;
@@ -67,9 +63,12 @@ function Navbar(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", bgcolor: "#1c1f2a" }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ boxShadow: "none", height: "11vh" }}>
+      <AppBar
+        component="nav"
+        sx={{ boxShadow: "none", height: "10vh", bgcolor: "black" }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -82,14 +81,20 @@ function Navbar(props) {
           </IconButton>
 
           <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1 }}>
+            <img src={logo} width="100px"></img>
             {navItems.map((item) => (
-              <NavLink to={item?.url} style={{ textDecoration: "none" }}>
+              <NavLink to={item?.url} style={{}}>
                 <Button
                   sx={{
                     ml: "30px",
-                    color: "#ffffff",
+                    color: "lightgray",
                     position: "relative",
+                    textTransform: "capitalize",
+                    border: "2px solid transparent",
+                    borderBottom: "2px solid #ab47bc",
+                    borderRadius: "0px",
                   }}
+                  className="navbar_hover"
                 >
                   {item?.name}
                 </Button>
@@ -125,37 +130,7 @@ function Navbar(props) {
               flexGrow: 0,
             }}
           >
-            {!isLoggedIn && (
-              <>
-                <NavLink to="../login" style={{ textDecoration: "none" }}>
-                  <Button
-                    sx={{
-                      ml: "5px",
-                      color: "#fff",
-                      position: "relative",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    Login
-                  </Button>
-                </NavLink>
-                <NavLink to="../register" style={{ textDecoration: "none" }}>
-                  <Button
-                    sx={{
-                      ml: "5px",
-
-                      position: "relative",
-                      textTransform: "capitalize",
-                      color: "#ffffff",
-                    }}
-                  >
-                    Register
-                  </Button>
-                </NavLink>
-              </>
-            )}
-
-            {isLoggedIn && <AccountCircleIcon />}
+            <AccountCircleIcon color="lightgray" />
           </Box>
         </Toolbar>
       </AppBar>

@@ -18,6 +18,7 @@ import Fade from "@mui/material/Fade";
 import DoneIcon from "@mui/icons-material/Done";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { NavLink } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -30,6 +31,7 @@ const style = {
   overflowY: "auto",
   p: 4,
   maxHeight: "90vh",
+  bgcolor: "#1c1f2a",
 };
 
 function Courses() {
@@ -45,65 +47,25 @@ function Courses() {
     setSelectedCourse({});
   };
 
-  const [items, setItems] = useState([
-    {
-      id: "1",
-      name: "Machine Learning using Python",
-      about:
-        "Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included.Learn to create Machine Learning Algorithms in Python and R from two Data Science experts. Code templates included.",
-      image:
-        "https://i.ibb.co/YW6krBY/andrea-de-santis-zwd435-ewb4-unsplash.jpg",
-      rating: "4.2",
-      ratingnum: "377",
-      registered: true,
-      what_learn: [
-        "Harness The Power Of Anaconda/iPython For Practical Data Science",
-        "Read In Data Into The Python Environment From Different Sources",
-        "Carry Out Basic Data Pre-processing & Wrangling In Python",
-        "Implement Unsupervised/Clustering Techniques Such As k-means Clustering",
-        "Implement Dimensional Reduction Techniques (PCA) & Feature Selection",
-        "Implement Supervised Learning Techniques/Classification ",
-      ],
-    },
-    {
-      id: "2",
-      name: "FullStack MERN Develpopment",
-      about:
-        "A MERN stack full stack course covers the development of web applications using MongoDB, Express.js, React.js, and Node.js. It teaches learners how to create dynamic, scalable, and robust web applications with features such as user authentication, data storage and retrieval, and real-time updates. ",
-      image: "https://i.ibb.co/WsL3B0N/MERN.webp",
-      rating: "4.7",
-      ratingnum: "792",
-      registered: false,
-      what_learn: [
-        "Harness The Power Of Anaconda/iPython For Practical Data Science",
-        "Read In Data Into The Python Environment From Different Sources",
-        "Carry Out Basic Data Pre-processing & Wrangling In Python",
-        "Implement Unsupervised/Clustering Techniques Such As k-means Clustering",
-        "Implement Dimensional Reduction Techniques (PCA) & Feature Selection",
-        "Implement Supervised Learning Techniques/Classification ",
-      ],
-    },
-  ]);
+  const [items, setItems] = useState([]);
 
-  const userdata = JSON.parse(localStorage.getItem("userdata") || null);
   useEffect(() => {
-    console.log(userdata);
-    // axios
-    //   .get("http://localhost:5000/products/userproducts/" + userdata?.id)
-    //   .then(function (response) {
-    //     console.log(response);
-    //     setItems(response.data.data);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    axios
+      .get("http://localhost:5000/course")
+      .then(function (response) {
+        console.log(response);
+        setItems(response?.data?.courses);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
 
   return (
     <>
       <Navbar />
-      <Container maxWidth={false}>
-        <Grid container spacing={6} sx={{ p: 6 }}>
+      <Container maxWidth={false} sx={{ display: "flex" }}>
+        <Grid container spacing={6} sx={{ p: 6, height: "100%" }}>
           {items.map((item) => (
             <Grid xs={11} md={6} lg={3} xl={3} key={item._id}>
               <motion.div
@@ -125,7 +87,12 @@ function Courses() {
                 whileInView="visible"
                 viewport={{ once: true }}
               >
-                <Card sx={{ width: "100%" }}>
+                <Card
+                  sx={{
+                    width: "100%",
+                    bgcolor: "#1c1f2a",
+                  }}
+                >
                   <CardActionArea onClick={(e) => handleOpen(e, item)}>
                     <CardMedia
                       component="img"
@@ -134,12 +101,16 @@ function Courses() {
                       alt={item?.name}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        sx={{ color: "secondary.light" }}
+                      >
                         {item?.name}
                       </Typography>
                       <Typography
                         variant="body2"
-                        color="text.disabled"
+                        color="gray"
                         className="truncate-3"
                       >
                         {item?.about}
@@ -155,21 +126,17 @@ function Courses() {
                         <Typography
                           sx={{ mr: 1, color: "#faaf00", fontSize: "14px" }}
                         >
-                          {item?.rating}
+                          {item?.ratingNum}
                         </Typography>
                         <Rating
                           size="small"
                           name="half-rating-read"
-                          defaultValue={item?.rating}
+                          defaultValue={item?.ratingNum}
                           precision={0.5}
                           readOnly
                         />
-                        <Typography
-                          sx={{ ml: 1 }}
-                          variant="body2"
-                          color="text.disabled"
-                        >
-                          ({item?.ratingnum})
+                        <Typography sx={{ ml: 1 }} variant="body2" color="gray">
+                          ({item?.rating})
                         </Typography>
                       </Box>
                     </CardContent>
@@ -197,8 +164,8 @@ function Courses() {
             <Box sx={style}>
               <Typography
                 id="transition-modal-title"
-                variant="h6"
-                component="h2"
+                variant="h4"
+                color="secondary.light"
               >
                 {selectedCourse?.name}
               </Typography>
@@ -212,121 +179,63 @@ function Courses() {
                 }}
               >
                 <Typography sx={{ mr: 1, color: "#faaf00", fontSize: "14px" }}>
-                  {selectedCourse?.rating}
+                  {selectedCourse?.ratingNum}
                 </Typography>
                 <Rating
                   size="small"
                   name="half-rating-read"
-                  defaultValue={selectedCourse?.rating}
+                  defaultValue={selectedCourse?.ratingNum}
                   precision={0.5}
                   readOnly
                 />
-                <Typography
-                  sx={{ ml: 1 }}
-                  variant="body2"
-                  color="text.disabled"
-                >
-                  ({selectedCourse?.ratingnum})
+                <Typography sx={{ ml: 1 }} variant="body2" color="gray">
+                  ({selectedCourse?.rating})
                 </Typography>
               </Box>
-              <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              <Typography
+                id="transition-modal-description"
+                sx={{ mt: 2, color: "gray" }}
+              >
                 {selectedCourse?.about}
               </Typography>
 
+              <Typography
+                id="transition-modal-description"
+                variant="h5"
+                sx={{ mt: 2, color: "secondary.light" }}
+              >
+                What will you learn?
+              </Typography>
               <Grid
                 container
                 spacing={2}
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
-                sx={{ p: 6 }}
+                sx={{ p: 2 }}
               >
                 {selectedCourse?.what_learn?.map((objective) => (
-                  <Grid xs={12} md={6} sx={{ display: "flex" }} key={objective}>
-                    <DoneIcon sx={{ mr: "10px" }} />
+                  <Grid
+                    xs={12}
+                    md={4}
+                    sx={{ display: "flex", color: "gray" }}
+                    key={objective}
+                  >
+                    <DoneIcon sx={{ mr: "10px", color: "#ab47bc" }} />
                     {objective}
                   </Grid>
                 ))}
-
-                <Grid xs={11} md={3}>
-                  <Card sx={{ width: "100%" }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="190"
-                        image="https://i.ibb.co/Kjfm5Kq/beginner.png"
-                        alt="beginner image"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          Beginner
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          color="text.disabled"
-                          className="truncate-3"
-                        >
-                          Suitable for beginners with little to no experience
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Grid>
-
-                <Grid xs={12} md={3}>
-                  <Card sx={{ width: "100%" }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="190"
-                        image="https://i.ibb.co/tbtXMQf/intermediate.png"
-                        alt="beginner image"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          Intermediate
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          color="text.disabled"
-                          className="truncate-3"
-                        >
-                          Suitable for learners with some experience
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Grid>
-
-                <Grid xs={12} md={3}>
-                  <Card sx={{ width: "100%" }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="190"
-                        image="https://i.ibb.co/Xb2KFST/advanced.png"
-                        alt="beginner image"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          Advanced
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          color="text.disabled"
-                          className="truncate-3"
-                        >
-                          Suitable for experienced learners up for a challenge
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Grid>
               </Grid>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <Button sx={{ mx: "auto" }} variant="contained" color="success">
-                  Start Learning
-                </Button>
+                <NavLink to={"../learn-course/" + selectedCourse._id}>
+                  <Button
+                    sx={{ mx: "auto" }}
+                    variant="outlined"
+                    color="secondary"
+                  >
+                    {selectedCourse?.registered ? "Continue" : "Register"}
+                  </Button>
+                </NavLink>
               </Box>
             </Box>
           </Fade>

@@ -20,7 +20,7 @@ function App() {
         <Route path="/courses" element={<Courses />}></Route>
 
         <Route
-          path="/learn-course"
+          path="/learn-course/:courseid"
           element={<LearnCourse toast={toast} />}
         ></Route>
 
