@@ -68,7 +68,9 @@ function ProgressSidebar({
             {courseDetails?.modules?.map((course_module, index) => {
               return (
                 <Box
-                  className="menuHover"
+                  className={
+                    index === currentModule ? "menuActive" : "menuHover"
+                  }
                   variant="outlined"
                   sx={{
                     p: 2,
@@ -80,7 +82,11 @@ function ProgressSidebar({
                     setCurrentModule(index);
                   }}
                 >
-                  <CheckCircleIcon sx={{ color: "lightgray" }} />
+                  <CheckCircleIcon
+                    sx={{
+                      color: course_module.status ? "lightgreen" : "lightgray",
+                    }}
+                  />
                   <Box sx={{ mx: "10px", color: "lightgray" }}>
                     {course_module?.topic}
                   </Box>

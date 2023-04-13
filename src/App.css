@@ -3,7 +3,7 @@
 body {
   width: 100%;
   height: 100%;
-  overflow-y: hidden;
+  overflow: hidden;
   background: #202531 !important;
 }
 
@@ -19,7 +19,7 @@ body {
 .menuHover:hover,
 .menuActive {
   transition: 200ms;
-  background: #a68caaba;
+  background: #a52992;
 }
 
 .navbar_hover:hover {

@@ -10,6 +10,7 @@ function TeacherText({ type, message }) {
           color: "lightgray",
           background: "#2a2b32",
           width: "100%",
+          border: "1px solid #1c1f2a",
         }}
       >
         <Box
@@ -26,7 +27,15 @@ function TeacherText({ type, message }) {
           </Typography>
           <Typography
             sx={{
-              color: "aqua",
+              color:
+                type === "question"
+                  ? "yellow"
+                  : type === "explanation"
+                  ? "aqua"
+                  : type == "hint"
+                  ? "#a52992"
+                  : "lightgreen", //either question ,explanation or answer
+              textTransform: "capitalize",
             }}
           >
             {type}

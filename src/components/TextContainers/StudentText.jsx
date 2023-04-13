@@ -10,6 +10,7 @@ function StudentText({ type, message }) {
           color: "lightgray",
           background: "#1c1f2a",
           width: "100%",
+          border: "1px solid #2a2b32",
         }}
       >
         <Box
@@ -25,7 +26,13 @@ function StudentText({ type, message }) {
           </Typography>
           <Typography
             sx={{
-              color: "lightgreen",
+              textTransform: "capitalize",
+              color:
+                type === "doubt"
+                  ? "yellow"
+                  : type === "hint"
+                  ? "#a52992"
+                  : "lightgreen", //either doubt ,hint or answer
             }}
           >
             {type}

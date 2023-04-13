@@ -10,6 +10,7 @@ import { createContext, useEffect, useState } from "react";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Navigate } from "react-router-dom";
 function App() {
   return (
     <>
@@ -28,6 +29,7 @@ function App() {
 
         <Route path="/login" element={<Login toast={toast} />}></Route>
 
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="*" element={<>404</>}></Route>
       </Routes>
     </>

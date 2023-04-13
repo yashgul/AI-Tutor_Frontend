@@ -55,15 +55,15 @@ function Login(props) {
     <>
       {/* <Navbar /> */}
       <Card
-        className="order-summary-background"
         sx={{
           width: { xs: "60vw", md: "30vw" },
+          bgcolor: "#1c1f2a",
           margin: "auto",
           mt: 4,
           p: 4,
         }}
       >
-        <Typography variant="h3" sx={{ mb: 1 }}>
+        <Typography variant="h3" sx={{ mb: 1, color: "lightgray" }}>
           Login
         </Typography>
 
@@ -96,7 +96,20 @@ function Login(props) {
                     label={"Email Address"}
                     inputRef={ref}
                     error={invalid}
+                    color="secondary"
+                    variant="filled"
                     helperText={errors.email ? errors.email.message : ""}
+                    inputProps={{
+                      sx: {
+                        color: "gray",
+                        borderBottom: "1px solid lightgray",
+                      },
+                    }}
+                    InputLabelProps={{
+                      sx: {
+                        color: "gray",
+                      },
+                    }}
                   />
                 )}
               />
@@ -122,7 +135,20 @@ function Login(props) {
                     inputRef={ref}
                     error={invalid}
                     type="password"
+                    color="secondary"
+                    variant="filled"
                     helperText={errors.pwd1 ? errors.pwd1.message : ""}
+                    inputProps={{
+                      sx: {
+                        color: "gray",
+                        borderBottom: "1px solid lightgray",
+                      },
+                    }}
+                    InputLabelProps={{
+                      sx: {
+                        color: "gray",
+                      },
+                    }}
                   />
                 )}
               />
@@ -131,8 +157,8 @@ function Login(props) {
             <Grid xs={12}>
               <Button
                 type="submit"
+                color="secondary"
                 variant="contained"
-                color="error"
                 sx={{ width: { xs: "100%", md: "30%" } }}
               >
                 Submit
@@ -140,7 +166,7 @@ function Login(props) {
             </Grid>
 
             <Grid xs={12}>
-              <Typography>
+              <Typography color="lightgray">
                 Havent created an account yet?{" "}
                 <NavLink style={{ textDecoration: "none" }} to="../register">
                   Register

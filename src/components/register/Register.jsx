@@ -57,12 +57,13 @@ function Register(props) {
         className="order-summary-background"
         sx={{
           width: { xs: "100vw", md: "50vw" },
+          bgcolor: "#1c1f2a",
           margin: "auto",
           mt: 4,
           p: 4,
         }}
       >
-        <Typography variant="h3" sx={{ mb: 1 }}>
+        <Typography variant="h3" sx={{ mb: 1, color: "lightgray" }}>
           Register
         </Typography>
 
@@ -94,9 +95,22 @@ function Register(props) {
                     label={"First Name"}
                     inputRef={ref}
                     error={invalid}
+                    color="secondary"
+                    variant="filled"
                     helperText={
                       errors.firstName ? errors.firstName.message : ""
                     }
+                    inputProps={{
+                      sx: {
+                        color: "gray",
+                        borderBottom: "1px solid lightgray",
+                      },
+                    }}
+                    InputLabelProps={{
+                      sx: {
+                        color: "gray",
+                      },
+                    }}
                   />
                 )}
               />
@@ -125,7 +139,20 @@ function Register(props) {
                     label={"Last Name"}
                     inputRef={ref}
                     error={invalid}
+                    color="secondary"
+                    variant="filled"
                     helperText={errors.lastName ? errors.lastName.message : ""}
+                    inputProps={{
+                      sx: {
+                        color: "gray",
+                        borderBottom: "1px solid lightgray",
+                      },
+                    }}
+                    InputLabelProps={{
+                      sx: {
+                        color: "gray",
+                      },
+                    }}
                   />
                 )}
               />
@@ -156,6 +183,19 @@ function Register(props) {
                     inputRef={ref}
                     error={invalid}
                     helperText={errors.email ? errors.email.message : ""}
+                    color="secondary"
+                    variant="filled"
+                    inputProps={{
+                      sx: {
+                        color: "gray",
+                        borderBottom: "1px solid lightgray",
+                      },
+                    }}
+                    InputLabelProps={{
+                      sx: {
+                        color: "gray",
+                      },
+                    }}
                   />
                 )}
               />
@@ -189,6 +229,19 @@ function Register(props) {
                     inputRef={ref}
                     error={invalid}
                     helperText={errors.phoneno ? errors.phoneno.message : ""}
+                    color="secondary"
+                    variant="filled"
+                    inputProps={{
+                      sx: {
+                        color: "gray",
+                        borderBottom: "1px solid lightgray",
+                      },
+                    }}
+                    InputLabelProps={{
+                      sx: {
+                        color: "gray",
+                      },
+                    }}
                   />
                 )}
               />
@@ -215,6 +268,19 @@ function Register(props) {
                     error={invalid}
                     type="password"
                     helperText={errors.pwd1 ? errors.pwd1.message : ""}
+                    color="secondary"
+                    variant="filled"
+                    inputProps={{
+                      sx: {
+                        color: "gray",
+                        borderBottom: "1px solid lightgray",
+                      },
+                    }}
+                    InputLabelProps={{
+                      sx: {
+                        color: "gray",
+                      },
+                    }}
                   />
                 )}
               />
@@ -246,6 +312,19 @@ function Register(props) {
                     error={invalid}
                     type="password"
                     helperText={errors.pwd2 ? errors.pwd2.message : ""}
+                    color="secondary"
+                    variant="filled"
+                    inputProps={{
+                      sx: {
+                        color: "gray",
+                        borderBottom: "1px solid lightgray",
+                      },
+                    }}
+                    InputLabelProps={{
+                      sx: {
+                        color: "gray",
+                      },
+                    }}
                   />
                 )}
               />
@@ -277,9 +356,9 @@ function Register(props) {
 
             <Grid xs={12}>
               <Button
+                color="secondary"
                 type="submit"
                 variant="contained"
-                color="error"
                 sx={{ width: { xs: "100%", md: "20%" } }}
               >
                 Submit
@@ -287,7 +366,7 @@ function Register(props) {
             </Grid>
 
             <Grid xs={12}>
-              <Typography>
+              <Typography color="gray">
                 Already have an account?{" "}
                 <NavLink style={{ textDecoration: "none" }} to="../login">
                   Log in
