@@ -35,7 +35,7 @@ https://user-images.githubusercontent.com/76999990/231829673-4eda2a15-7cea-4645-
 ![Image of Page with list of courses](https://i.ibb.co/M5Cn3jp/courses.jpg)
 
 ### Course Modal Page
-![Image of Page with course modal](https://i.ibb.co/bz07K33/course-Module.jpg)
+![Image of Page with course modal](https://user-images.githubusercontent.com/76999990/233702320-d256ef67-f862-4611-a3c8-ea63578a9e64.JPG)
 
 ### Active Course Page
 ![Image of Page with course being learnt](https://i.ibb.co/VCNdPpp/Learn-Course.jpg)
